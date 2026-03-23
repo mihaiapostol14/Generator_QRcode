@@ -1,0 +1,449 @@
+.card-glass {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
+    grid-template-areas:
+        "title title"
+        "form preview";
+    gap: 30px;
+
+    width: 100%;
+    max-width: 1050px;
+    padding: 38px;
+
+    background: rgba(12, 19, 34, 0.94);
+    border: 1px solid rgba(0, 255, 220, 0.28);
+    border-radius: 24px;
+
+    box-shadow:
+        0 0 25px rgba(0, 255, 220, 0.08),
+        0 0 60px rgba(124, 58, 237, 0.08),
+        0 25px 70px rgba(0, 0, 0, 0.4);
+
+    overflow: hidden;
+}
+
+.card-glass::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 10%;
+    width: 80%;
+    height: 2px;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        #00ffdc,
+        #8b5cf6,
+        transparent
+    );
+}
+
+/* Title */
+.title-container {
+    grid-area: title;
+    width: 100%;
+    text-align: center;
+    padding-bottom: 22px;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+}
+
+.title {
+    margin: 0;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 800;
+    letter-spacing: 4px;
+    color: #00ffdc;
+
+    text-shadow:
+        0 0 8px rgba(0, 255, 220, 0.7),
+        0 0 25px rgba(0, 255, 220, 0.25);
+}
+
+/* Form */
+.qr-form {
+    grid-area: form;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 0;
+    width: 100%;
+}
+
+.qr-form .mb-3 {
+    margin-bottom: 22px !important;
+}
+
+.qr-form .form-label {
+    display: block;
+    margin-bottom: 9px;
+    color: #b7c7df;
+    font-size: 0.88rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.input-wrapper {
+    width: 100%;
+}
+
+/* Inputs and Dropdowns */
+.qr-form .form-control:not([type="color"]),
+.qr-form .form-select {
+    display: block;
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 14px;
+
+    color: #e5f0ff;
+    background-color: #0a1220;
+    border: 1px solid #263750;
+    border-radius: 10px;
+    font-size: 0.95rem;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.2s ease;
+}
+
+.qr-form .form-control::placeholder {
+    color: #71829d;
+    opacity: 1;
+}
+
+.qr-form .form-select option {
+    color: #e5f0ff;
+    background: #0a1220;
+}
+
+.qr-form .form-control:focus,
+.qr-form .form-select:focus {
+    color: #ffffff;
+    background-color: #0d182a;
+    border-color: #00ffdc;
+    outline: none;
+
+    box-shadow:
+        0 0 0 3px rgba(0, 255, 220, 0.1),
+        0 0 15px rgba(0, 255, 220, 0.08);
+}
+
+/* Number Input Specific Styling & Spinner Handling */
+.qr-form input[type="number"] {
+    appearance: textfield;
+    -moz-appearance: textfield;
+}
+
+.qr-form input[type="number"]::-webkit-inner-spin-button,
+.qr-form input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Settings Rows */
+.qr-form .row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -8px;
+    margin-left: -8px;
+}
+
+.qr-form .col-6 {
+    width: 50%;
+    min-width: 0;
+    padding-right: 8px;
+    padding-left: 8px;
+}
+
+/* Color Pickers */
+.qr-form .form-control-color,
+.qr-form input[type="color"] {
+    display: block;
+    width: 100%;
+    height: 48px;
+    min-height: 48px;
+    padding: 5px;
+
+    background: #0a1220;
+    border: 1px solid #263750;
+    border-radius: 10px;
+    cursor: pointer;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.qr-form input[type="color"]:hover,
+.qr-form input[type="color"]:focus {
+    border-color: #00ffdc;
+    box-shadow: 0 0 12px rgba(0, 255, 220, 0.12);
+}
+
+.qr-form input[type="color"]:focus {
+    outline: none;
+}
+
+/* Generate Button */
+.btn-generate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    min-height: 52px;
+    margin-top: 4px;
+    padding: 14px 20px;
+
+    color: #041016;
+    background: linear-gradient(110deg, #00ffdc, #00c8ff);
+    border: 1px solid #00ffdc;
+    border-radius: 10px;
+
+    font-size: 0.95rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    cursor: pointer;
+
+    box-shadow: 0 0 18px rgba(0, 255, 220, 0.17);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        filter 0.2s ease;
+}
+
+.btn-generate:hover {
+    color: #020b13;
+    background: linear-gradient(110deg, #45ffe7, #54d7ff);
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 0 20px rgba(0, 255, 220, 0.35),
+        0 0 40px rgba(0, 200, 255, 0.12);
+}
+
+.btn-generate:active {
+    transform: translateY(0);
+}
+
+/* QR Preview */
+.qr-code-box {
+    grid-area: preview;
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    min-width: 0;
+    min-height: 340px;
+    padding: 28px;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(0, 255, 220, 0.055),
+            transparent 70%
+        ),
+        #090f1c;
+
+    border: 1px dashed rgba(0, 255, 220, 0.35);
+    border-radius: 18px;
+    overflow: hidden;
+}
+
+/* Neon Corner Accents */
+.qr-code-box::before,
+.qr-code-box::after {
+    content: "";
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    pointer-events: none;
+}
+
+.qr-code-box::before {
+    top: 12px;
+    left: 12px;
+    border-top: 2px solid #00ffdc;
+    border-left: 2px solid #00ffdc;
+}
+
+.qr-code-box::after {
+    right: 12px;
+    bottom: 12px;
+    border-right: 2px solid #8b5cf6;
+    border-bottom: 2px solid #8b5cf6;
+}
+
+/* Download Link */
+.qr-download-link {
+    position: relative;
+    z-index: 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    max-width: 100%;
+    padding: 12px;
+}
+
+.qr-download-link:hover {
+    transform: scale(1.025);
+}
+
+/* QR Image */
+.qr-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 300px;
+    max-height: 360px;
+    object-fit: contain;
+    image-rendering: pixelated;
+}
+
+/* Empty State */
+.placeholder-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    max-width: 300px;
+    padding: 20px;
+
+    color: #8fa3bd;
+    text-align: center;
+}
+
+.placeholder-icon {
+    margin-bottom: 18px;
+    font-size: 3.5rem;
+    line-height: 1;
+    color: #00ffdc;
+    filter: drop-shadow(0 0 12px rgba(0, 255, 220, 0.45));
+}
+
+.placeholder-wrapper p {
+    margin: 0;
+    color: #8fa3bd;
+    font-size: 0.95rem;
+    line-height: 1.8;
+}
+
+#placeholder-text.text-muted {
+    color: #8fa3bd !important;
+}
+
+/* Tooltip */
+.custom-tooltip .tooltip-inner,
+.tooltip-inner {
+    color: #00ffdc;
+    background: #0a1220;
+    border: 1px solid rgba(0, 255, 220, 0.35);
+    border-radius: 6px;
+    font-size: 0.8rem;
+}
+
+/* Validation and Focus */
+.qr-form input:invalid:focus {
+    border-color: #fb7185;
+}
+
+.qr-form input:focus-visible,
+.qr-form select:focus-visible,
+.qr-form button:focus-visible,
+.qr-download-link:focus-visible {
+    outline: 2px solid #00ffdc;
+    outline-offset: 3px;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+    .card-glass {
+        gap: 24px;
+        padding: 28px;
+    }
+
+    .qr-code-box {
+        min-height: 300px;
+        padding: 20px;
+    }
+
+    .qr-img {
+        max-width: 250px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 650px) {
+    .container {
+        padding: 18px 12px;
+    }
+
+    .card-glass {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-areas:
+            "title"
+            "form"
+            "preview";
+
+        gap: 24px;
+        padding: 22px 18px;
+        border-radius: 18px;
+    }
+
+    .title-container {
+        padding-bottom: 18px;
+    }
+
+    .title {
+        font-size: 1.75rem;
+        letter-spacing: 3px;
+    }
+
+    .qr-form .mb-3 {
+        margin-bottom: 18px !important;
+    }
+
+    .qr-code-box {
+        min-height: 260px;
+        padding: 22px;
+    }
+
+    .qr-img {
+        max-width: 230px;
+        max-height: 300px;
+    }
+
+    .btn-generate {
+        min-height: 48px;
+    }
+}
+
+/* Extra Small Devices */
+@media (max-width: 380px) {
+    .card-glass {
+        padding: 18px 14px;
+    }
+
+    .qr-form .col-6 {
+        width: 100%;
+    }
+
+    .title {
+        font-size: 1.45rem;
+        letter-spacing: 2px;
+    }
+
+    .qr-code-box {
+        min-height: 220px;
+    }
+}
