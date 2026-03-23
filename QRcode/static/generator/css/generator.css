@@ -1,0 +1,147 @@
+/* =========================
+   Global Reset & Background
+   ========================= */
+body {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  margin: 0;
+}
+
+/* =========================
+   Glass Card
+   ========================= */
+.card-glass {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 24px;
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.card-glass:hover {
+  transform: translateY(-4px);
+}
+
+/* =========================
+   Title
+   ========================= */
+.title {
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: #2d3436;
+  margin-bottom: 1.5rem;
+}
+
+/* =========================
+   Form
+   ========================= */
+.form-control {
+  border-radius: 12px;
+  padding: 14px;
+  border: 2px solid #e0e0e0;
+  font-size: 0.95rem;
+}
+
+.form-control:focus {
+  border-color: #764ba2;
+  box-shadow: 0 0 0 4px rgba(118, 75, 162, 0.15);
+}
+
+/* =========================
+   Generate Button
+   ========================= */
+.btn-generate {
+  background: #764ba2;
+  border: none;
+  border-radius: 12px;
+  padding: 14px;
+  font-weight: 600;
+  width: 100%;
+  margin-top: 1rem;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn-generate:hover {
+  background: #5a3782;
+}
+
+/* =========================
+   QR Code Box
+   ========================= */
+.qr-code-box {
+  margin-top: 2rem;
+  padding: 20px;
+  border: 2px dashed #dcdde1;
+  border-radius: 20px;
+  min-height: 240px;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* =========================
+   QR Image
+   ========================= */
+.qr-img {
+  max-width: 220px;
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* =========================
+   Placeholder Text
+   ========================= */
+.text-muted {
+  font-size: 0.9rem;
+  color: #636e72;
+  text-align: center;
+}
+
+/* =========================
+   Custom Tooltip Styling
+   ========================= */
+
+/* 1. Style the main tooltip box */
+.custom-tooltip .tooltip-inner {
+  background-color: #764ba2; /* Matches your .btn-generate purple */
+  color: #ffffff;
+  font-family: 'Inter', sans-serif; /* Matches your body font */
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 12px; /* Matches your .form-control radius */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* 2. Style the arrow to match the purple box */
+.custom-tooltip.bs-tooltip-top .tooltip-arrow::before {
+  border-top-color: #764ba2;
+}
+
+.custom-tooltip.bs-tooltip-bottom .tooltip-arrow::before {
+  border-bottom-color: #764ba2;
+}
+
+.custom-tooltip.bs-tooltip-start .tooltip-arrow::before {
+  border-left-color: #764ba2;
+}
+
+.custom-tooltip.bs-tooltip-end .tooltip-arrow::before {
+  border-right-color: #764ba2;
+}
+
+/* 3. Add a smooth transition effect */
+.tooltip.fade {
+  transition: opacity 0.2s linear, transform 0.2s ease-out;
+}
