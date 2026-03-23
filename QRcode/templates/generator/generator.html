@@ -1,0 +1,57 @@
+{%extends 'base.html'%}
+{%load static%}
+
+{%block content%}
+  <div class="container d-flex justify-content-center">
+    <div class="card-glass">
+      <div class="title h4 text-uppercase">QR Generator</div>
+
+      <form action="{% url 'generator:generator' %}" method="POST" id="qr-form">
+        {% csrf_token %}
+        <div class="mb-3">
+          {{form.content}}
+        </div>
+        <button type="submit" class="btn btn-generate">
+          Generate QR Code
+        </button>
+      </form>
+
+      <div class="qr-code-box" id="qr-container">
+        {% if qr.get_qr_code_image %}
+          <a 
+            href="{{ qr.get_qr_code_image }}" 
+            download
+            data-bs-toggle="tooltip"
+            data-bs-placement="bottom"
+            title="Download QR Code"
+          >
+            <img src="{{ qr.get_qr_code_image }}" class="qr-img" id="qr-img" alt="QR Code" />
+          </a>
+        {% else %}
+          <p class="text-muted" id="placeholder-text">
+            Enter a link above to generate your unique QR code.
+          </p>
+        {% endif %}
+      </div>
+    </div>
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+    crossorigin="anonymous"
+  />
+
+
+  <!-- Bootstrap JS (bundle includes Popper) -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous">
+  </script>
+
+  <!-- Your Custom JS (AFTER Bootstrap) -->
+  <!-- Your Custom CSS -->
+  <link rel="stylesheet" href="{% static 'generator/css/generator.css' %}">
+  <script type="text/javascript" src="{% static 'generator/js/bootstrap.js' %}"></script>
+  <script type="text/javascript" src="{% static 'generator/js/generator.js' %}"></script>
+{%endblock%}
