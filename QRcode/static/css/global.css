@@ -1,0 +1,74 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+
+html,
+body {
+    margin: 0 !important;
+    min-height: 100vh !important;
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+    color: #e5f0ff;
+    background-color: #070b14 !important;
+
+    background:
+        radial-gradient(
+            ellipse at 15% 15%,
+            rgba(0, 255, 220, 0.09),
+            transparent 38%
+        ),
+        radial-gradient(
+            ellipse at 85% 85%,
+            rgba(124, 58, 237, 0.12),
+            transparent 38%
+        ),
+        #070b14;
+}
+
+
+::-webkit-scrollbar{
+    display: none;
+    overflow: hidden;
+}
+
+
+/* Images */
+img {
+    max-width: 100%;
+}
+
+/* Shared Container */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 24px;
+}
+
+/* Vertical Alignment Utility */
+.min-vh-100 {
+    min-height: 100vh;
+}
+
+/* Accessibility */
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}
+
