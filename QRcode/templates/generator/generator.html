@@ -2,43 +2,98 @@
 {% load static %}
 
 {% block content %}
-<div class="container d-flex justify-content-center">
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
     <div class="card-glass">
-        <div class="title h4 text-uppercase">QR Generator</div>
 
-        <form action="{% url 'generator:generator' %}" method="POST" class="qr-form">
+        <!-- Title Header -->
+        <div class="title-container">
+            <h1 class="title text-uppercase">QR Generator</h1>
+        </div>
+
+        <!-- Left Column: Generator Form -->
+        <form action="{% url 'generator:generator' %}" method="POST" class="qr-form" id="qr-generator-form">
             {% csrf_token %}
+
+            <!-- Content Input -->
             <div class="mb-3">
-                {{ form.content }}
+                <label for="{{ form.content.id_for_label }}" class="form-label">
+                    Text or URL
+                </label>
+
+                <div class="input-wrapper">
+                    {{ form.content }}
+                </div>
             </div>
 
-            <button type="submit" class="btn btn-generate">
-                Generate QR Code
+            <!-- Settings Row: Size & Border -->
+            <div class="row mb-3">
+                <div class="col-6">
+                    <label for="{{ form.box_size.id_for_label }}" class="form-label">
+                        QR Code Size
+                    </label>
+                    {{ form.box_size }}
+                </div>
+
+                <div class="col-6">
+                    <label for="{{ form.border.id_for_label }}" class="form-label">
+                        Border Size
+                    </label>
+                    {{ form.border }}
+                </div>
+            </div>
+
+            <!-- Colors Pickers -->
+            <div class="row mb-3">
+                <div class="col-6">
+                    <label for="{{ form.fill_color.id_for_label }}" class="form-label">
+                        QR Code Color
+                    </label>
+                    {{ form.fill_color }}
+                </div>
+
+                <div class="col-6">
+                    <label for="{{ form.back_color.id_for_label }}" class="form-label">
+                        Background
+                    </label>
+                    {{ form.back_color }}
+                </div>
+            </div>
+
+            <!-- Action Button -->
+            <button type="submit" class="btn btn-generate" id="generate-btn">
+                <span>Generate QR Code</span>
             </button>
         </form>
 
+        <!-- Right Column: QR Code Display -->
         <div class="qr-code-box" id="qr-container">
-            {% if qr.get_qr_code_image %}
-            <a
-                href="{{ qr.get_qr_code_image }}"
-                download
-                data-bs-toggle="tooltip"
-                data-bs-placement="bottom"
-                title="Download QR Code"
-            >
-                <img
-                    src="{{ qr.get_qr_code_image }}"
-                    class="qr-img"
-                    id="qr-img"
-                    alt="QR Code"
-                />
-            </a>
+            {% if qr and qr.qr_image %}
+                <a
+                    href="{{ qr.get_qr_code_image }}"
+                    download="qr_code.png"
+                    class="qr-download-link"
+                    data-bs-toggle="tooltip"
+                    data-bs-custom-class="custom-tooltip"
+                    data-bs-placement="bottom"
+                    title="Click to Download"
+                >
+                    <img
+                        src="{{ qr.get_qr_code_image }}"
+                        class="qr-img"
+                        id="qr-img"
+                        alt="Generated QR Code"
+                    />
+                </a>
             {% else %}
-            <p class="text-muted" id="placeholder-text">
-                Enter a link above to generate your unique QR code.
-            </p>
+                <div class="placeholder-wrapper" id="placeholder-text">
+                    <div class="placeholder-icon">⚡</div>
+                    <p>
+                        Enter a link or text on the left to generate your custom cyberpunk QR code.
+                    </p>
+                </div>
             {% endif %}
         </div>
+
     </div>
 </div>
 
