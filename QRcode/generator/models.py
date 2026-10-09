@@ -9,6 +9,10 @@ from django.db import models
 class QRCode(models.Model):
     content = models.CharField(max_length=255)
     qr_image = models.ImageField(upload_to='qr_codes/', blank=True)
+    box_size = models.IntegerField(default=10)
+    border = models.IntegerField(default=4)
+    fill_color = models.CharField(max_length=20, default="#000000")
+    back_color = models.CharField(max_length=20, default="#FFFFFF")
 
     def __str__(self):
         return self.content
@@ -21,11 +25,12 @@ class QRCode(models.Model):
     def save(self, *args, **kwargs):
         qr_version = 1
         qr_error_correction = qrcode.ERROR_CORRECT_L
-        qr_box_size = 10
-        qr_border = 4
 
-        fill_color = "black"
-        back_color = "white"
+        # Use the model fields instead of hardcoded QR settings
+        qr_box_size = self.box_size
+        qr_border = self.border
+        fill_color = self.fill_color
+        back_color = self.back_color
 
         qr_image_factory = None
         qr_mask_pattern = None
@@ -44,7 +49,7 @@ class QRCode(models.Model):
 
         img = qr.make_image(
             fill_color=fill_color,
-            back_color=back_color
+            back_color=back_color,
         )
 
         timestamp = datetime.now().strftime('%Y-%m-%d_%H-%M-%S-%f')
@@ -52,6 +57,7 @@ class QRCode(models.Model):
 
         buffer = BytesIO()
         img.save(buffer, format='PNG')
+        buffer.seek(0)
 
         self.qr_image.save(filename, File(buffer), save=False)
 
